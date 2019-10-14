@@ -36,15 +36,7 @@ def register(request):
         return render(request,"register.html", context)
 
 
-    """form = RegisterForm()
-    context = {
 
-        "form":form
-    }
-
-
-    return render(request, "register.html", context)
-"""
 def loginUser(request):
     form = LoginForm(request.POST or None)
 
