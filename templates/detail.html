@@ -28,19 +28,58 @@
 
         <hr>
 
+            {% if comments %}
+                {% for comment in comments %}
+                    <div class="media mb-4">
+                        <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                        <div class="media-body">
+                            <div align="right">
+                                <small>{{ comment.comment_date }}</small>
+                            </div>
+
+                            <h5 class="mt-0">{{ comment.comment_author }}</h5>
+
+                            {{comment.comment_content}}<hr>
+
+                        </div>
+                    </div>
+
+                {% endfor %}
 
 
+            {% else %}
+                <div class="alert alert-warning">
+                    İlk tavsiyemi sen ver.
+                </div>
 
+            {% endif %}
 
+          <div class="card my-4">
+          <h5 class="card-header">Tavsiyeni Bekliyoruz.</h5>
+          <div class="card-body">
+            <form method="post" action="{% url 'article:comment' article.id %}">
+                {% csrf_token %}
+
+              <div class="form-group">
+
+                 <label>Yorumu Atan</label>
+                 <input name="comment_author" type="text" class="form-control" value="{{ article.author.username }}">
+
+              </div>
+
+              <div class="form-group">
+                <textarea name="comment_content" class="form-control" rows="3"></textarea>
+              </div>
+              <button type="submit" class="btn btn-danger">Gönder</button>
+            </form>
+          </div>
+        </div>
 
 
 
       </div>
 
-
-
     </div>
-
 
 
 
